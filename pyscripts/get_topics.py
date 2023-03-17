@@ -117,6 +117,35 @@ def get_wordcloud(name, words, weights):
     plt.tight_layout()
     plt.savefig("data/plots/wordclouds/" + name + ".png")
 
+def normalize_topic_distribution_per_row(folder_name):
+    def get_top_n_topics(row, n):
+        top_topic_names = []
+        top_topic_weights = []
+        total = row.sum()
+        
+        for _ in range(n):
+            max_ix = row.argmax()
+            max_topic = row.index[max_ix]
+            max_value = row[max_ix]*100/total
+            row[max_ix] = -100000
+
+            top_topic_names.append(max_topic)
+            top_topic_weights.append(max_value)
+        
+        new_row = {}
+        for i, (name, weight) in enumerate(zip(top_topic_names, top_topic_weights), 1):
+            new_row[f"top_topic_name_{i}"] = name
+            new_row[f"top_topic_weight_{i}"] = weight
+        
+        return new_row
+
+    for topic_model in topic_models.keys():
+        filename = folder_name + topic_model + ".csv"
+        new_filename = folder_name[:-1] + "_compressed/" + topic_model + ".csv"
+        df = pd.read_csv(filename)
+        df = pd.DataFrame.from_records(df.apply(lambda x: get_top_n_topics(x, 3), axis=1).values)
+        df.to_csv(new_filename, index=False)
+
 def main():
     print("Loading dataset...")
     data = pd.read_csv("data/data.csv", usecols=["text"])["text"].tolist()
@@ -156,4 +185,5 @@ def main():
         sample2topics = pd.DataFrame(topic_model.transform(x), columns=[f"topic_{i}" for i in range(1, n_components+1)])
         sample2topics.to_csv("data/data_topics/" + name + ".csv", index=False)
 
-main()
+# main()
+normalize_topic_distribution_per_row("data/data_topics/")
