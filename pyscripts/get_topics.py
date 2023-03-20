@@ -139,12 +139,17 @@ def normalize_topic_distribution_per_row(folder_name):
         
         return new_row
 
+    emebds = pd.read_csv("data/embeddings.csv")
     for topic_model in topic_models.keys():
         filename = folder_name + topic_model + ".csv"
         new_filename = folder_name[:-1] + "_compressed/" + topic_model + ".csv"
         df = pd.read_csv(filename)
-        df = pd.DataFrame.from_records(df.apply(lambda x: get_top_n_topics(x, 3), axis=1).values)
+        df = pd.DataFrame.from_records(df.apply(lambda x: get_top_n_topics(x, 3), axis=1).values).reset_index()
         df.to_csv(new_filename, index=False)
+
+        # augment embeddings.csv
+        emebds= emebds.merge(df[["top_topic_name_1", "index"]], on="index").rename(columns={"top_topic_name_1":f"top_topic_{topic_model}"})
+        emebds.to_csv("data/embeddings_w_topics.csv", index=False)
 
 def main():
     print("Loading dataset...")
