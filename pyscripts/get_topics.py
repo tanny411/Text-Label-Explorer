@@ -32,6 +32,8 @@ def plot_top_words(model, feature_names, n_top_words, title):
 
     plt.subplots_adjust(top=0.90, bottom=0.05, wspace=0.90, hspace=0.3)
     plt.savefig("data/plots/topics/" + title + ".png")
+    # close figures to release from memory
+    plt.close('all')
 
 
 topic_models = {
@@ -109,6 +111,8 @@ def get_tf(data):
     return tf_vectorizer, tf
 
 def get_wordcloud(name, words, weights):
+    # initiliaze figure
+    plt.figure()
     # frequencies : dict from string to float
     frequencies = {word:weight for word, weight in zip(words, weights)}
     word_cloud = WordCloud(collocations = False, background_color = 'white').fit_words(frequencies)
@@ -116,6 +120,8 @@ def get_wordcloud(name, words, weights):
     plt.axis("off")
     plt.tight_layout()
     plt.savefig("data/plots/wordclouds/" + name + ".png")
+    # close figures to release from memory
+    plt.close('all')
 
 def normalize_topic_distribution_per_row(folder_name):
     def get_top_n_topics(row, n):
@@ -168,10 +174,11 @@ def main():
         topic_model = func.fit(x)
         feature_names = vectorizer.get_feature_names_out()
         
-        # plot_top_words(topic_model, feature_names, n_top_words, name)
+        plot_top_words(topic_model, feature_names, n_top_words, name)
 
         # components_ : (n_components, n_features)
         topic_df = pd.DataFrame()
+        all_topic_df = pd.DataFrame()
         # loop through topics
         for topic_num, topics in enumerate(topic_model.components_, 1):
             # get top_n words per topic
@@ -179,16 +186,21 @@ def main():
             top_features = [feature_names[i] for i in top_features_ind]
             # get the weights of the words
             weights = topics[top_features_ind]
+            # save top words
             topic_df[f"topic_{topic_num}_weights"] = weights
             topic_df[f"topic_{topic_num}_words"] = top_features
+            # save all words
+            all_topic_df[f"topic_{topic_num}_weights"] = topics
+            all_topic_df[f"topic_{topic_num}_words"] = feature_names
 
             get_wordcloud(name + "_" + str(topic_num), feature_names, topics)
         
         topic_df.to_csv("data/topic_models/" + name + ".csv", index=False)
+        all_topic_df.to_csv("data/topic_models_all_words/" + name + ".csv", index=False)
 
         # transform(X) : (n_samples, n_components)
         sample2topics = pd.DataFrame(topic_model.transform(x), columns=[f"topic_{i}" for i in range(1, n_components+1)])
         sample2topics.to_csv("data/data_topics/" + name + ".csv", index=False)
 
-# main()
+main()
 normalize_topic_distribution_per_row("data/data_topics/")
