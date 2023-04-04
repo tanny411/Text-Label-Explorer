@@ -1,16 +1,75 @@
 
-/* For the four sections */
-.container {
+/* For the four sections
+@media only screen and (max-width: 1920px) {
+  html {
+    zoom: 50%;
+  }
+} */
+#project-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 2rem 0;
+  text-shadow: 2px 2px 5px #000000;
+  color: #ffffff;
+  background-color:rgb(108, 110, 109);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* Animation for each letter */
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+    color: #2b86e8;
+  }
+  50% {
+    transform: translateY(-10px);
+    color: #ead5f9;
+  }
+  100% {
+    transform: translateY(0);
+    color: #3c3e42;
+  }
+}
+
+/* Add delay to each letter */
+#project-title span:nth-child(1) {
+  animation-delay: 0s;
+}
+#project-title span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+#project-title span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+/* ... add more for each letter */
+
+/* Apply animation to each letter */
+#project-title span {
+  display: inline-block;
+  animation: bounce 3s ease-in-out infinite;
+}
+#project-title p {
+  font-size: 0.8rem;
+}
+
+.flex-container {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     height: 100vh;
     height: 100svh;
+    background-color: #4d4d4d;
   }
   
   .top-section {
     display: flex;
     flex-direction: row;
     height: 50%;
+    background-color: #c8d0d6;
   }
   
   .bottom-section {
@@ -21,17 +80,17 @@
   
   .Dimensionality-Reduction {
     flex: 1;
-    border: 1px solid black;
+    border: none;
     width: 40%;
     border-radius: 20px;
     padding: 20px;
-
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
   }
 
 
   
 
-  .Dimensionality-Reduction, .Topic-Modeling, .Top-topics, .Top-words,.cloud-section, .chart-section, .selected-words{
+  .Dimensionality-Reduction, .Topic-Modeling, .Top-topics, .Top-words,.cloud-section, .chart-section{
     width: 100%;
     height: 100%;
     overflow-y: auto;
@@ -42,67 +101,85 @@
 
   .Topic-Modeling {
     flex: 1;
-    border: 1px solid black;
+    border: 1px solid  white;
     width: 40%;
     border-radius: 20px;
     padding: 10px;
-  }
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
 
   #top-5-sent{
     flex: 1;
-    border: 1px solid black;
+    border: 1px solid white;
     width: 20%;
     border-radius: 20px;
     padding: 10px;
     overflow-y: auto;
     overflow-x: auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
   }
   
   .Top-topics {
     flex: 1;
-    border: 1px solid black;
+    border: 1px solid white;
     width : 70%;
     /* display: flex; */
     flex-direction: column;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
   }
 
   .selector-section {
     height: 20%;
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid white;
     background-color: lightgray;
-    border-radius: 20px
+    border-radius: 20px;
+    padding: 10px;
+    overflow-y: auto;
+    overflow-x: auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
   }
 
   .topic-section {
     display: flex;
     flex-direction: row;
     height: 80%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
   }
   
   .chart-section {
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 20px;
     flex: 1;
     height: 100%;
     width: 100%;
     background-color: lightblue;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
   }
   
   .cloud-section {
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 20px;
     flex: 1;
     height: 100%;
     width: 100%;
     background-color: rgb(222, 239, 245);
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
   }
   
   .selected-words {
     
-    border: 1px solid black;
+    border: none;
     width : 30%;
     border-radius: 20px;
+    padding: 10px;
+    overflow-y: auto;
+    overflow-x: auto;
+    background-color: #c8d0d6;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+
   }
 
 /* Individual Chart elements */
