@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Label Explorer</title>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes">
+
+   
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js"></script>
+  <script src="public/d3.layout.cloud.js"></script>
+  <!-- <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script> -->
+<link rel="stylesheet" type="text/css" href="public/style.css">
+</head>
+<body>
+    <div id="project-title" style="position: absolute; top: -30px; left: 70;">
+        <span>T</span>
+        <span>e</span>
+        <span>x</span>
+        <span>t</span>
+        <span> </span>
+        <span>L</span>
+        <span>a</span>
+        <span>b</span>
+        <span>e</span>
+        <span>l</span>
+        <span> </span>
+        <span>E</span>
+        <span>x</span>
+        <span>p</span>
+        <span>l</span>
+        <span>o</span>
+        <span>r</span>
+        <span>e</span>
+        <span>r</span>
+        <p>by Aisha Khatun and Mustapha Momoh</p>
+    </div>
+
+<div id = "context-menu">
+    <div class= "item" id="add-to-list">add to list</div>
+</div>
+<div class ="container">
+    <div class ="top-section"> 
+        <!-- <div id="side-panel" style="position: absolute; top: 20px; right: 20px; width: 200px; height: 50%; padding: 20px;"></div> -->
+        <div class="Dimensionality-Reduction">
+                  <!--Add side panel-->
+        <aside style="float: right; margin-right: 10%;">
+          <h3>Dimensionality Reduction</h3>
+          <select id="scatter-select">
+              <option value="scatter0">Please Select a Technique</option>
+              <option value="scatter1">Factor Analysis scatter plot</option>
+              <option value="scatter2">Hessian LLE plot</option>
+              <option value="scatter3">Isomap scatter plot</option>
+              <option value="scatter4">Kernel PCA scatter plot</option>
+              <option value="scatter5">Linear Discriminant Analysis scatter plot</option>
+              <option value="scatter6">LTSA LLE scatter plot</option>
+              <option value="scatter7">MDS scatter plot</option>
+              <option value="scatter8">Modified LLE scatter plot</option>
+              <option value="scatter9">NCA scatter plot</option>
+              <option value="scatter10">PCA scatter plot</option>
+              <option value="scatter11">Random projection scatter plot</option>
+              <option value="scatter12">Random Trees scatter plot</option>
+              <option value="scatter13">Spectral Embeddings plot</option>
+              <option value="scatter14">Standard LLE scatter plot</option>
+              <option value="scatter15">t-SNE scatter plot</option>
+              <option value="scatter16">Truncated SVD scatter plot</option>
+              <option value="scatter17">UMAP scatter plot</option>
+          </select>
+      </aside>
+            <div id="side-panel" style="width: 95%; margin-top: 120px;"></div>
+            <div class="ScatterPCA" id = "scatter1"></div>
+            <div class="ScatterKernelPCA" id = "scatter2"></div>
+            <div class="ScatterUMAP" id = "scatter3"></div>
+            <div class="ScatterRandomProjection" id = "scatter4"></div>
+            <div class="ScatterTruncatedSVD" id = "scatter5"></div>
+            <div class="ScatterLinearDiscriminantAnalysis" id = "scatter6"></div>
+            <div class="ScatterIsomap" id = "scatter7"></div>
+            <div class="ScatterStandardLLE" id = "scatter8"></div>
+            <div class="ScatterModifiedLLE" id = "scatter9"></div>
+            <div class="ScatterHessianLLE" id = "scatter10"></div>
+            <div class="ScatterLTSA" id = "scatter11"></div>
+            <div class="ScatterMDS" id = "scatter12"></div>
+            <div class="ScatterRandomTrees" id = "scatter13"></div>
+            <div class="ScatterSpectralEmbedding" id = "scatter14"></div>
+            <div class="ScatterTSNE" id = "scatter15"></div>
+            <div class="ScatterNCA" id = "scatter16"></div>
+            <div class="ScatterFactorAnalysis" id = "scatter17"></div>
+        </div>
+        <div class = "Topic-Modeling">
+          <!-- <aside style="float: right; margin-right: 20%;"> -->
+            <h3>Topic Modeling</h3>
+            <select id="topic-select">
+                <option value="Select Topic">Please Select a Technique</option>
+                <option value="top_topic_NMF_model_(Frobenius_norm)">NMF model (Frobenius norm)</option>
+                <option value="top_topic_NMF_model_(KL_divergence)">NMF model (KL divergence)</option>
+                <option value="top_topic_MiniBatchNMF_model_(Frobenius_norm)">MiniBatchNMF model (Frobenius norm)</option>
+                <option value="top_topic_MiniBatchNMF_model_(KL_divergence)">MiniBatchNMF model (KL divergence)</option>
+                <option value="top_topic_LDA">LDA Model</option>
+                <option value="top_topic_LSA">LSA Model</option>
+            </select>
+        <!-- </aside> -->
+        <!-- <aside style="float: right; margin-right: 20%;"> -->
+            <br><br>
+            <div id="DUT-container" style="display: none;">
+              <label for="dim_under_topics">Dimensionality Reduction:</label>
+              <select id="DUT-select">
+                <option value="scatter0">Please Select a Technique</option>
+                <option value="scatter18">Factor Analysis scatter plot</option>
+                <option value="scatter19">Hessian LLE plot</option>
+                <option value="scatter20">Isomap scatter plot</option>
+                <option value="scatter21">Kernel PCA scatter plot</option>
+                <option value="scatter22">Linear Discriminant Analysis scatter plot</option>
+                <option value="scatter23">LTSA LLE scatter plot</option>
+                <option value="scatter24">MDS scatter plot</option>
+                <option value="scatter25">Modified LLE scatter plot</option>
+                <option value="scatter26">NCA scatter plot</option>
+                <option value="scatter27">PCA scatter plot</option>
+                <option value="scatter28">Random projection scatter plot</option>
+                <option value="scatter29">Random Trees scatter plot</option>
+                <option value="scatter30">Spectral Embeddings plot</option>
+                <option value="scatter31">Standard LLE scatter plot</option>
+                <option value="scatter32">t-SNE scatter plot</option>
+                <option value="scatter33">Truncated SVD scatter plot</option>
+                <option value="scatter34">UMAP scatter plot</option>
+              </select>
+            </div>
+          <!-- </aside> -->
+          <div id="topic-side-panel" style="width: 95%"></div>
+          <div class="ScatterPCA" id = "scatter18"></div>
+          <div class="ScatterKernelPCA" id = "scatter19"></div>
+          <div class="ScatterUMAP" id = "scatter20"></div>
+          <div class="ScatterRandomProjection" id = "scatter21"></div>
+          <div class="ScatterTruncatedSVD" id = "scatter22"></div>  
+          <div class="ScatterLinearDiscriminantAnalysis" id = "scatter23"></div>
+          <div class="ScatterIsomap" id = "scatter24"></div>
+          <div class="ScatterStandardLLE" id = "scatter25"></div>
+          <div class="ScatterModifiedLLE" id = "scatter26"></div>
+          <div class="ScatterHessianLLE" id = "scatter27"></div>
+          <div class="ScatterLTSA" id = "scatter28"></div>
+          <div class="ScatterMDS" id = "scatter29"></div>
+          <div class="ScatterRandomTrees" id = "scatter30"></div>
+          <div class="ScatterSpectralEmbedding" id = "scatter31"></div>
+          <div class="ScatterTSNE" id = "scatter32"></div>
+          <div class="ScatterNCA" id = "scatter33"></div>
+          <div class="ScatterFactorAnalysis" id = "scatter34"></div>
+        </div>
+        <div id="top-5-sent" style="width: 95%"></div>
+    </div>
+    <div class = "bottom-section">
+        <div class = "Top-topics" id="full-container">
+          <div class="selector-section"></div>
+          <div class="topic-section">
+            <div class="chart-section"></div>
+            <div class="cloud-section"></div>
+          </div>
+        </div>
+        <div class = "selected-words" id="words-list"></div>
+    </div>
+</div>
+
+
+
+<script>
+
+  // Load the dataset
+  d3.csv("public/embeddings_new.csv", function(error, data) {
+    if (error) {
+        console.log(error);
+    } else {
+
+      //replace the column names in the data object with the new column names in columns
+      function removeSpace(d){
+          Object.keys(d).forEach(function(OrigColName){
+            if (OrigColName.includes(" ")){
+              var newColName = OrigColName.replace(/ /g, "_");
+              d[newColName] = d[OrigColName];
+              delete d[OrigColName];
+            }
+          });
+          return d;
+        };
+        data = data.map(removeSpace);
+
+
+        var columnNames = Object.keys(data[0]).slice(1); // Get column names starting from index 1 
+        console.log(columnNames)
+    
+        //loop through all the columns and get the min and max values
+        var extents = {}
+        columnNames.forEach(function(column) {
+        // Check if the column contains only numeric values
+        var isNumeric = data.every(function(d) {
+            return !isNaN(+d[column]);
+        });
+
+        if (isNumeric) {
+            extents[column] = d3.extent(data, function(d) { //get the min and max values 
+                return +d[column];
+            });
+        }
+        });
+
+        //get the columns in the extents object
+        var columns = Object.keys(extents);
+
+        var columnPairs = [];
+        for (let i = 0; i<columns.length; i+=2){
+            columnPairs.push([columns[i], columns[i+1]]); //create an array of arrays with the column names
+        }
+
+        console.log(columnPairs)
+
+        //sort the column pairs based on the first element of the inner array
+        columnPairs.sort(function(a, b) {
+            return a[0].localeCompare(b[0]);
+        });
+        //store the list of valid scatter plots in an array
+        var validScatters = []; // create an empty array
+        for (var i = 1; i <= 17; i++) {
+          var id = "scatter" + i; // construct the id string
+          validScatters.push(id); // add the element to the array
+        }
+console.log(validScatters);
+
+function updateTopFiveMatches(the_index){
+
+//load the top_5_matches.csv file
+d3.csv("public/top_5_matches.csv", function(error, data){
+    if (error) throw error;
+    //print the top_sent_1 column
+    console.log(data[the_index].top_sent_1);
+
+    //create an array for the top 5 sentences and their scores in the following format [[sentence, score], [sentence, score], ...] to be printed later on an svg
+    var top_5_sentences = [[data[the_index].top_sent_1, data[the_index].top_sent_tag_1, data[the_index].top_sent_score_1], [data[the_index].top_sent_2,data[the_index].top_sent_tag_2, data[the_index].top_sent_score_2], [data[the_index].top_sent_3,data[the_index].top_sent_tag_3, data[the_index].top_sent_score_3], [data[the_index].top_sent_4,data[the_index].top_sent_tag_4, data[the_index].top_sent_score_4], [data[the_index].top_sent_5, data[the_index].top_sent_tag_5, data[the_index].top_sent_score_5]];
+
+    // create the HTML string for the text and tags
+    var infoHtml = "<p><b style='font-size: 20px;'>Text:</b> " + "<span style='font-size: 20px;'>" + data[the_index].text + "</span><br><b style='font-size: 20px;'>Tag:</b> " + "<span style='font-size: 20px;'>" + data[the_index].tags + "</span></p><br>";
+
+
+    // create the HTML string for the top 5 sentences and their scores
+    var html = "<h2 style='margin-top: 10px; margin-left: 25%;' anchor='end'>Top Five(5) Matches</h2>";
+    html = html + infoHtml;
+    html += "<div style='border: 1px solid black; padding: 10px; border-radius: 5px;'>"; // add the box
+    for (var i = 0; i < top_5_sentences.length; i++) {
+    var sentence = top_5_sentences[i][0];
+        var tag = top_5_sentences[i][1];
+    var score = top_5_sentences[i][2];
+    html += "<p><b>Top sentence " + (i+1) + ": </b>" + sentence +"<br>" +"<b>Top sentence "+(i+1) +" Tag: </b>"+tag+"<br>" +"<b>Top Sentence " + (i+1) + " Score: </b>" + score + "</p>";
+    }
+    html += "</div>"; // close the box
+
+    // check if the HTML string already contains the title
+    if (!html.includes("<h2 style='margin-top: 10px; margin-left: 25%;' anchor='end'>Top Five(5) Matches</h2>")) {
+    // add the title to the beginning of the HTML string
+    html = "<h2 style='margin-top: 10px; margin-left: 25%;' anchor='end'>Top Five(5) Matches</h2>" + html;
+    }
+
+
+    // set the HTML of the top-5-sent div
+    d3.select("#top-5-sent").html(html);
+
+
+
+});
+}
+//create a function to clear the topFiveMatches called clearTopFiveMatches
+function clearTopFiveMatches(){
+//clear the top-5-sent div
+        d3.select("#top-5-sent").html("");
+}
+
+var selectedWordsDiv = d3.select("#words-list");
+d3.select(document).on("click", function() {
+                var contextMenu= d3.select("#context-menu");
+                if (!contextMenu.empty() && !contextMenu.node().contains(d3.event.target)) {
+                    contextMenu.style("display", "none");
+                }
+                });
+
+                //add a title to the selected words list
+                //check if the title already exists
+        if (selectedWordsDiv.select("h2").empty()){
+            selectedWordsDiv.append('h2').text("Selected data").style("font-weight", "bold").style("margin-top", "10px").style("margin-left", "25%").attr("anchor", "end");
+        }
+
+         // check if the Save List button already exists, if not, create it and append it to the selectedWordsDiv
+
+                var saveListButton = d3.select("#save-list-btn");
+                    if (saveListButton.empty()) {
+                    // Button doesn't exist, so create it
+                    saveListBtn = selectedWordsDiv.append('button')
+                        .text('Save List')
+                        .attr("id", "save-list-btn")
+                        .style('position', 'absolute')
+                        .style('bottom', '10px')
+                        .style('right', '10px');
+}
+
+
+                // create the Clear List button and append it to the selectedWordsDiv
+                var clearBtn = d3.select("#clear-list-btn");
+                    if (clearBtn.empty()) {
+                    var clearButton = selectedWordsDiv.append("button")
+                        .text("Clear List")
+                        .attr("id", "clear-list-btn")
+                        .style("position", "absolute")
+                        .style("bottom", "10px")
+                        .style("right", "100px");
+                    }
+
+
+                    // add an event listener to the Clear List button
+                    clearButton.on("click", function(){
+                        //select all list items except the first one and remove them
+                        selectedWordsDiv.selectAll("li:not(#header-row)").remove();
+                    });
+
+                //create the edit button and append it to the selectedWordsDiv
+                var editBtn = d3.select("#edit-btn");
+                    if (editBtn.empty()) {
+                    var editButton = selectedWordsDiv.append("button")
+                        .text("Edit")
+                        .attr("id", "edit-btn")
+                        .style("position", "absolute")
+                        .style("bottom", "10px")
+                        .style("right", "190px");
+                    }
+                //add an event listener to the edit button 
+                    editButton.on("click", function(){
+                        //select all list items except the first one and make them editable, also enable remove the bullet points when list item is empty and backspace is pressed
+                        selectedWordsDiv.selectAll("li:not(#header-row)").attr("contenteditable", "true")
+                    });
+                //add a Save Changes button and append it to the selectedWordsDiv
+                var saveChangesBtn = d3.select("#save-changes-btn");
+                if (saveChangesBtn.empty()) {
+                    var saveChangesButton = selectedWordsDiv.append("button")
+                        .text("Save Changes")
+                        .attr("id", "save-changes-btn")
+                        .style("position", "absolute")
+                        .style("bottom", "10px")
+                        .style("right", "260px");
+                }
+
+                //add an event listener to the Save Changes button to set the list items to be uneditable and remove any empty list items
+                saveChangesButton.on("click", function(){
+                    //select all list items except the first one and make them uneditable
+                    selectedWordsDiv.selectAll("li:not(#header-row)").attr("contenteditable", "false");
+                    //select all list items except the first one and remove any empty list items by checking if the length of the text is 0
+                    selectedWordsDiv.selectAll("li:not(#header-row)").filter(function(d, i){
+                        return d3.select(this).text().length === 0;
+                    }).remove();
+                });
+
+                    //add a header row to selected words list
+                //check if the header row already exists
+                if (selectedWordsDiv.select("#header-row").empty()) {
+                    selectedWordsDiv.append('li').html("index&nbsp;&nbsp;|&nbsp;&nbsp;tag&nbsp;&nbsp;|&nbsp;&nbsp;sub-tag&nbsp;&nbsp;|&nbsp;&nbsp;text&nbsp;&nbsp;|&nbsp;&nbsp;notes").style("font-weight", "bold").attr("id", "header-row");
+                }
+                    saveListBtn.on('click', function() {
+                        // create the CSV string
+                        var csv = ''; // header row
+                        selectedWordsDiv.selectAll('li').each(function(d, i) {
+                            var listItemText = d3.select(this).html().replace(/&nbsp;/g, ' ');
+                            var data = listItemText.split(/\s*\|\s*/); // split the data into an array
+                            
+                            // Enclose the parts of the text with commas in double quotes and escape any double quotes within the text
+                            data = data.map(function(text) {
+                                if (text.indexOf(',') >= 0 || text.indexOf('"') >= 0) {
+                                // Escape any double quotes within the text by replacing them with two double quotes
+                                text = text.replace(/"/g, '""');
+                                return '"' + text + '"';
+                                } else {
+                                return text;
+                                }
+                            });
+  
+                                csv += data.join(',') + '\n'; // join the data into a CSV row by separating with commas and add a new line
+                        });
+                    
+
+                        // create a new Blob with the CSV data
+                        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+
+                        // create a download link and click it to download the CSV file
+                        var link = document.createElement('a');
+                        if (link.download !== undefined) { // feature detection
+                            var url = URL.createObjectURL(blob);
+                            link.setAttribute('href', url);
+                            link.setAttribute('download', 'for_review.csv');
+                            link.style.visibility = 'hidden';
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        }
+                    });
+      // Set up the scatter plot
+      d3.select("#scatter-select")
+        .on("change", function() {
+          var value = d3.select(this).property("value");
+          if (!validScatters.includes(value)) {
+            //remove side panel
+            d3.select("#side-panel").selectAll("*").remove();
+                for (let i = 0; i <= 17; i++) {  //consider iterating through the validScatters array like this: validScatters.forEach(function(id) { d3.select(`#${id}`).selectAll("*").remove(); });
+                    d3.select(`#scatter${i}`).selectAll("*").remove();
+                }
+            }
+            else {
+            //remove side panel
+            d3.select("#side-panel").selectAll("*").remove();
+
+            for (let i = 0; i <= 17; i++) {
+                d3.select(`#scatter${i}`).selectAll("*").remove();
+                }
+                function updateSidePanel(data) {
+                  if (!data || Object.keys(data).length === 0) { // handle empty or missing data object
+                    d3.select("#side-panel")
+                      .html("<h2 class='side-panel-text'>No data selected</h2>");
+                  } else {
+                    // Select the side panel div and update its contents
+                    var tag = data.tags || "No item selected!";
+                    var subTag = data.sub_tags || "";
+                    var text = data.text || "";
+                    d3.select("#side-panel")
+                      .html("<h2 class='side-panel-text'><strong>Tag: </strong>" + tag + "</h2><p><strong>Sub-tag: </strong>" + subTag + "</p><p><strong>Text: </strong>" + text + "</p>");
+                  }
+                }
+
+
+
+
+            //extract the scatter number from the value using regex
+            var numberPattern = /\d+/; 
+            var scatterNumber = parseInt(value.match(numberPattern)[0]);
+
+            //column index is scatter number - 1
+            var columnIndex = scatterNumber - 1;
+
+            const width = 650;
+            const height = 400;
+
+            //create a variable for the scatter plot
+            var scatter = d3.select(`#scatter${scatterNumber}`)
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+            var x_temp = d3.scaleLinear().domain(extents[columnPairs[columnIndex][0]]).range([50, 550]);
+            var y_temp = d3.scaleLinear().domain(extents[columnPairs[columnIndex][1]]).range([350, 50]);
+
+            n_xticks = x_temp.ticks().length;
+            n_yticks = y_temp.ticks().length;
+
+            step_x = (extents[columnPairs[columnIndex][0]][1] - extents[columnPairs[columnIndex][0]][0])/n_xticks;
+            step_y = (extents[columnPairs[columnIndex][1]][1] - extents[columnPairs[columnIndex][1]][0])/n_yticks;
+
+            var x = d3.scaleLinear().domain([extents[columnPairs[columnIndex][0]][0] - step_x*2, extents[columnPairs[columnIndex][0]][1] + step_x*2]).range([50, 550]);
+            var y = d3.scaleLinear().domain([extents[columnPairs[columnIndex][1]][0] - step_y*2, extents[columnPairs[columnIndex][1]][1] + step_y*2]).range([350, 50]);
+
+            var tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .offset([-10, 0])
+            .html(function(d) {
+                return "<strong>Tag:</strong> <strong><span style='color:white'>" + d.tags + "</span>" + "</strong>";
+            });
+
+            var color = d3.scaleOrdinal()
+            .domain(data.map(d => d.tags))
+            .range(d3.schemeCategory10);
+
+            scatter.append("g")
+            .attr("transform", "translate(0, 350)")
+            .call(d3.axisBottom(x));
+
+            scatter.append("g")
+            .attr("transform", "translate(50, 0)")
+            .call(d3.axisLeft(y));
+
+            scatter.selectAll("dot")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("cx", function(d) { return x(d[columnPairs[columnIndex][0]]); } )
+            .attr("cy", function(d) { return y(d[columnPairs[columnIndex][1]]); } )
+            .attr("r", 2)
+            .style("fill", function(d) { return color(d.tags); })
+            .style("cursor", "pointer")
+            .call(tip)
+            .on("mouseover", tip.show)
+            .on("mouseout", tip.hide)
+            .attr("class", function(d, i) { return "point-" + i; })
+            .on("contextmenu", function(d, i) {
+                d3.event.preventDefault();
+               //create context menu
+            var contextMenu= d3.select("#context-menu");
+            contextMenu.style("display", "block");
+            contextMenu.style("left", d3.event.pageX + "px");
+            contextMenu.style("top", d3.event.pageY + "px");
+            contextMenu.select("#add-to-list")
+            .on("click", function (){
+                console.log([d.index, d.tags, d.sub_tags, d.text])
+
+                var dataToAdd = [`${d.index}&nbsp;&nbsp;|&nbsp;&nbsp; ${d.tags}&nbsp;&nbsp;|&nbsp;&nbsp; ${d.sub_tags}&nbsp;&nbsp;|&nbsp;&nbsp; ${d.text}`];
+                selectedWordsDiv.append("li").html(dataToAdd);  //"p" is for paragraph
+                //hide the context menu
+                contextMenu.style("display", "none");
+            })
+
+
+          }
+            )
+
+            .on("click", function(d) {
+                //get the index of the selected point
+                var the_index = d.index;
+                updateTopFiveMatches(the_index);
+                //remove the highlight from all other points
+                scatter.selectAll("circle")
+                  .attr("fill", d => color(d.tags))
+                  .attr("r", 2)
+                  .attr("stroke", "none");
+
+                  //highlight the selected point
+                d3.select(this)
+                  .attr("fill", d=> color(d.tags))
+                  .attr("r", 5)
+                  .attr("stroke", "black")
+                  .attr("stroke-width", 2);
+                // Update the side panel with the data for the selected point
+                updateSidePanel(d);
+                    });
+            
+              //append the plot title
+              scatter.append("text")
+              .attr("x", 300)
+              .attr("y", 50)
+              .attr("text-anchor", "middle")
+              .style("font-size", "20px")
+              .text(columnPairs[columnIndex][0].slice(0, -2) +" " + "Scatter Plot");
+
+              //append the y axis label
+              scatter.append("text")
+              .attr("x", -70)
+              .attr("y", 12)
+              .attr("text-anchor", "end")
+              .attr("transform", "rotate(-90)")
+              .style("font-size", "14px")
+              .style("font-weight", "bold")
+              .text(columnPairs[columnIndex][1]);
+
+              //append the x axis label
+              scatter.append("text")
+              .attr("x", width-100)
+              .attr("y", height-10)
+              .attr("text-anchor", "end")
+              .style("font-size", "15px")
+              .style("font-weight", "bold")
+              .text(columnPairs[columnIndex][0]);
+
+              //append the legend
+              var legend = scatter.selectAll(".legend")
+              .data(color.domain())
+              .enter().append("g")
+              .attr("class", "legend")
+              .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+              //draw the legend colored rectangles
+              legend.append("rect")
+              .attr("x", width - 120)
+              .attr("y", 50)
+              .attr("width", 18)
+              .attr("height", 18)
+              .style("fill", color)
+              .style("cursor", "pointer")
+
+              //append the legend text
+              legend.append("text")
+              .attr("x", width - 100)
+              .attr("y", 59)
+              .attr("dy", ".35em")
+              .style("text-anchor", "start")
+              .text(d => d)
+
+              //click event handler for the legend
+              legend.select("rect")
+              .on("click", function(d){
+                updateSidePanel(d);
+                //check if rectangle is already highlighted
+                if (d3.select(this).style("stroke") == "black"){
+                  //unhighlight the rectangle
+                  d3.select(this).style("stroke", "none");
+
+                  //unhighlight the points
+                  scatter.selectAll("circle")
+                  .filter(function(e){
+                    return e.tags == d; //filter out the points that are not of the selected tag
+                  })
+                  .attr("fill", d => color(d.tags))
+                  .attr("r", 2)
+                  .attr("stroke", "none")
+                  //dim all other points
+                  .attr("opacity", 0);
+
+                  scatter.selectAll("circle")
+                  .attr("opacity", 1);
+                }
+                else{
+                  //highlight the rectangle
+                  d3.select(this).style("stroke", "black")
+                  .style("stroke-width", 2);
+
+                  //unhighlight other rectangles
+                  legend.selectAll("rect")
+                  .filter(function(e){
+                    return e != d; //filter out the rectangle that is already highlighted
+                  })
+                  .style("stroke", "none");
+
+                  //unhighlight all other points
+                  scatter.selectAll("circle")
+                  .filter(function(e){
+                    return e.tags != d; //filter out the points that are not of the selected tag
+                  })
+                  .attr("fill", d => color(d.tags))
+                  .attr("r", 2)
+                  .attr("stroke", "none")
+                  //dim all other points
+                  .attr("opacity", 0);
+
+                  //highlight the points of the selected tag
+                  scatter.selectAll("circle")
+                  .filter(function(e){
+                    return e.tags == d; //filter out the points that are not of the selected tag
+                  })
+                  .transition()
+                  .duration(500)
+                  .attr("fill", d => color(d.tags))
+                  .attr("r", 5)
+                  .attr("stroke", "black")
+                  .attr("stroke-width", 2)
+                  .attr("opacity", 1);
+                }
+              });
+
+            }
+          });
+
+         //function to clear the boxes
+          function clearboxes(){
+                  //slect the choose_topic svg and remove it
+                  d3.select(".selector-section").select("svg").remove();
+                }
+          
+          //function to clear the topic bars
+          function clearTopicBars() {
+                        d3.select(".chart-section").selectAll("svg").remove();
+                      }
+
+          //create a function to remove wordcloud called clearWordCloud
+          function clearWordCloud(){
+            d3.select('.cloud-section').selectAll('svg').remove();
+          }
+
+          var topicsDropdown = d3.select("#topic-select").node();
+          var DUTContainer = d3.select("#DUT-container").node();
+          var DUTDropdown = d3.select("#DUT-select").node();
+
+          //add event listener to the topic dropdown
+          let techniqueColumn;
+          d3.select(topicsDropdown).on("change", function(){
+            //clear side panel
+            d3.select("#topic-side-panel").selectAll("*").remove();
+            //remove the existing scatter plot
+              validTopicScatters.forEach(function(t_id){d3.select(`#${t_id}`).selectAll("*").remove();});
+            //clear the boxes
+            clearboxes();
+            //clear the topic bars
+            clearTopicBars();
+            //clear the wordcloud
+            clearWordCloud();
+            
+
+            if (topicsDropdown.value !== "Select Topic"){
+              DUTContainer.style.display = "block";
+              DUTDropdown.value = "scatter0"
+              techniqueColumn = topicsDropdown.value
+              console.log(techniqueColumn);
+            
+            } else {
+              DUTContainer.style.display = "none";
+              topicsDropdown.value = "Select Topic"; //reset the dropdown consider using empty string like ""
+            }
+          });
+
+          
+
+          validTopicScatters = [];
+          for (var i=18; i<=34; i++){
+            var t_id ="scatter" + i;
+            validTopicScatters.push(t_id);
+          }
+
+          //add event listener to the DUT dropdown
+          d3.select(DUTDropdown).on("change", function(){
+            DUT_value = DUTDropdown.value;
+            if (!validTopicScatters.includes(DUT_value)){
+              //remove the side panel
+              d3.select("#topic-side-panel").selectAll("*").remove();
+
+              //clear boxes
+              clearboxes();
+              //clear the topic bars
+              clearTopicBars();
+              //clear the wordcloud
+              clearWordCloud();
+
+              //remove the existing scatter plot
+              validTopicScatters.forEach(function(t_id){d3.select(`#${t_id}`).selectAll("*").remove();});
+
+            }else{
+              //remove the side panel
+              d3.select("#topic-side-panel").selectAll("*").remove();
+              //clear boxes
+              clearboxes();
+              //clear the topic bars
+              clearTopicBars();
+              //clear the wordcloud
+              clearWordCloud();
+
+              //remove the existing scatter plot
+              validTopicScatters.forEach(function(t_id){d3.select(`#${t_id}`).selectAll("*").remove();});
+              
+              //function to update the top five matches
+              
+              //function to update the side panel
+              function updateTopicSidePanel(data) {
+                  if (!data || Object.keys(data).length === 0) { // handle empty or missing data object
+                    d3.select("#topic-side-panel")
+                      .html("<h2 class='side-panel-text'>No data selected</h2>");
+                  } else {
+                    // Select the side panel div and update its contents
+                    var tag = data.tags || "No item selected!";
+                    var subTag = data.sub_tags || "";
+                    var text = data.text || "";
+                    d3.select("#topic-side-panel")
+                      .html("<h2 class='side-panel-text'><strong>Tag: </strong>" + tag + "</h2><p><strong>Sub-tag: </strong>" + subTag + "</p><p><strong>Text: </strong>" + text + "</p>");
+                  }
+                }
+
+                //extract the scatter number using regex
+                var topicScatterNumber = parseInt(DUT_value.match(/\d+/)[0]);
+
+                var topicColumnIndex = topicScatterNumber - 18;
+                var topicColumnPairs = Array.from(columnPairs); //create a copy of the column pairs array
+
+                console.log(topicColumnPairs);
+                //set up the scatter plot
+                const t_width = 650;
+                const t_height = 400;
+
+                //create a variable for the scatter plot
+                var t_scatter = d3.select(`#${DUT_value}`)
+                .append("svg")
+                .attr("width", t_width)
+                .attr("height", t_height)
+
+                var tx_temp = d3.scaleLinear().domain(extents[topicColumnPairs[topicColumnIndex][0]]).range([50, 550]);
+                var ty_temp = d3.scaleLinear().domain(extents[topicColumnPairs[topicColumnIndex][1]]).range([350, 50]);
+
+                n_txticks = tx_temp.ticks().length;
+                n_tyticks = ty_temp.ticks().length;
+
+                step_tx = (extents[topicColumnPairs[topicColumnIndex][0]][1] - extents[topicColumnPairs[topicColumnIndex][0]][0])/n_txticks;
+                step_ty = (extents[topicColumnPairs[topicColumnIndex][1]][1] - extents[topicColumnPairs[topicColumnIndex][1]][0])/n_tyticks;
+
+                var tx = d3.scaleLinear().domain([extents[topicColumnPairs[topicColumnIndex][0]][0]- step_tx*2, extents[topicColumnPairs[topicColumnIndex][0]][1] + step_tx*2]).range([50, 550]);
+                var ty = d3.scaleLinear().domain([extents[topicColumnPairs[topicColumnIndex][1]][0]- step_ty*2, extents[topicColumnPairs[topicColumnIndex][1]][1] + step_ty*2]).range([350, 50]);
+
+                //create the tip
+                var t_tip = d3.tip()
+                .attr("class", "d3-tip")
+                .offset([-10, 0])
+                .html(function(d){
+                  return "<strong>Tag:</strong> <span style='color:white'>" +d.tags + "</span>" + "</strong>";
+                });
+
+                console.log(techniqueColumn);
+                var t_color = d3.scaleOrdinal()
+                .domain(data.map(d => d[techniqueColumn])) //consider using the dot notation like d.techinqueColumn
+                .range(d3.schemeCategory10);
+
+                t_scatter.append("g")
+                .attr("transform", "translate(0, 350)")
+                .call(d3.axisBottom(tx));
+
+                t_scatter.append("g")
+                .attr("transform", "translate(50, 0)")
+                .call(d3.axisLeft(ty));
+
+                t_scatter.selectAll("dot")
+                .data(data)
+                .enter()
+                .append("circle")
+                .attr("cx", d => tx(d[topicColumnPairs[topicColumnIndex][0]]))
+                .attr("cy", d => ty(d[topicColumnPairs[topicColumnIndex][1]]))
+                .attr("r", 2)
+                .attr("fill", d => t_color(d[techniqueColumn]))
+                .attr("class", function(d, i) { return "point-" + i; })
+                .style("cursor", "pointer")
+                .call(t_tip)
+                .on("mouseover", t_tip.show)
+                .on("mouseout", t_tip.hide)
+                .attr("class", function(d, i) { return "point-" + i; })
+            .on("contextmenu", function(d, i) {
+                d3.event.preventDefault();
+               //create context menu
+            var contextMenu= d3.select("#context-menu");
+            contextMenu.style("display", "block");
+            contextMenu.style("left", d3.event.pageX + "px");
+            contextMenu.style("top", d3.event.pageY + "px");
+            contextMenu.select("#add-to-list")
+            .on("click", function (){
+                console.log([d.index, d.tags, d.sub_tags, d.text])
+
+                var dataToAdd = [`${d.index}&nbsp;&nbsp;|&nbsp;&nbsp; ${d.tags}&nbsp;&nbsp;|&nbsp;&nbsp; ${d.sub_tags}&nbsp;&nbsp;|&nbsp;&nbsp; ${d.text}`];
+                selectedWordsDiv.append("li").html(dataToAdd);  //"p" is for paragraph
+                //hide the context menu
+                contextMenu.style("display", "none");
+            })
+        })
+                .on("click", function(d, i){ //add the click event listener to the points, to highlight the selected point. d is the data, i is the index
+                  //clear the existing boxes
+                  clearboxes();
+                  //clear the topic bars
+                  clearTopicBars();
+                  //clear the wordcloud
+                  clearWordCloud();
+
+                  
+                  //remove the highlight from all other points
+                  t_scatter.selectAll("circle")
+                  .attr("fill", d => t_color(d[techniqueColumn]))
+                  .attr("r", 2)
+                  .attr("stroke", "none");
+
+                  //highlight the selected point
+                  d3.select(this)
+                  .attr("fill", d=> t_color(d[techniqueColumn]))
+                  .attr("r", 5)
+                  .attr("stroke", "black")
+                  .attr("stroke-width", 2);
+                  //update the side panel
+                  updateTopicSidePanel(d);
+
+                  //load the data in the topic_topics folder named after the techniqueColumn as a csv using d3.csv
+                function updateboxes(techniqueColumn) {
+                  d3.csv(`public/top_topics/${techniqueColumn}.csv`, function(error, data) {
+                    if (error) throw error;
+                    
+                    //save the data in a variable named box_data. Index column is the first column, so slice the array from the second element
+                    var box_data = [];
+                    Object.keys(data[i]).slice(1).forEach(key => {
+                        box_data[key] = data[i][key];
+                      });
+                    console.log(box_data);
+
+                    //change the box_data to an array of objects
+                    var box_data_array = [];
+                    for (let i = 1; i <= Object.keys(box_data).length / 2; i++) {
+                          const index = i.toString();
+                          const nameKey = `top_topic_name_${index}`;
+                          const weightKey = `top_topic_weight_${index}`;
+                          const newObj = {[nameKey]: box_data[nameKey], [weightKey]: box_data[weightKey]};
+                          box_data_array.push(newObj);
+                        }
+
+                        console.log(box_data_array);
+
+                        
+                
+                    //define the dimensions of the boxes
+                    var boxWidth = 200;
+                    var boxHeight = 50;
+                    var boxSpacing = 10;
+                    var left = 400;
+                    var top = 100;
+                    var bottom =100;
+                    var right = 400;
+
+                    //create the svg element
+                    var choose_topic = d3.select(".selector-section")
+                    .append("svg")
+                    .attr("width", (boxWidth+boxSpacing)*3+left + right)
+                    .attr("height", boxHeight*2 + top + bottom);
+
+                    //Add a pair of boxes for each topic
+                    var pairs = choose_topic.selectAll(".pair")
+                    .data(box_data_array)
+                    .enter()
+                    .append("g")
+                    .attr("class", "pair")
+                    .attr("transform", function(d, i) { // Position the pair of boxes for each topic side-by-side 
+                        return "translate(" + ((boxWidth+boxSpacing) * i+left) + ", 100)";
+                      });
+
+                    
+                    // Add the topic name box
+                    pairs.append("rect")
+                      .attr("class", "name-box") // Give the box a class so we can style it
+                      .attr("x", 0) //
+                      .attr("y", -4/3 * boxHeight) // Position the box at the top left of the pair
+                      // set the rx and ry attributes to make the corners rounded
+                        .attr("rx", 4)
+                        .attr("ry", 4)
+                      .attr("width", boxWidth)
+                      .attr("height", boxHeight)
+                      .attr("cursor", "pointer") 
+                      .on("click", function(d) {
+                        //remove the highlight from the other boxes
+                        choose_topic.selectAll(".name-box")
+                        .classed('clicked', false);
+                        // Handle the click event for the topic name box
+                       //
+                        d3.select(this).classed('clicked', !d3.select(this).classed('clicked'));
+
+
+
+                        topic_name = d[Object.keys(d)[0]]
+                        //topic_file is the tecniqueColumn minus the top_topic_ prefix and underscores replaced with spaces
+                        topic_file = techniqueColumn.replace("top_topic_", "").replace(/_/g, " ");
+
+                        //load the csv file for the selected techniqueColumn from text_label_explorer folder
+                    function plotTopicBars(topic_file, topic_name) {
+                        d3.csv(`public/text_label_explorer/${topic_file}.csv`, function(error, data) {
+                          if (error) throw error;
+                          else {
+                            var chartdivWidth = d3.select(".chart-section").node().getBoundingClientRect().width;
+                            var chartdivHeight = d3.select(".chart-section").node().getBoundingClientRect().height;
+                            console.log(chartdivWidth, chartdivHeight);
+                            var margin = {top: 100, right: 50, bottom: 50, left: 100};
+                            var chartWidth = 900 - margin.left - margin.right;
+                            var chartHeight = 600 - margin.top - margin.bottom;
+
+                            var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+
+                            var choose_chart = d3.select(".chart-section")
+                            .append("svg")
+                            .attr("width", chartWidth + margin.left + margin.right)
+                            .attr("height", chartHeight + margin.top + margin.bottom)
+                            .style("background-color", "lightblue")
+                            
+                            //create the x and y scales
+                            var x = d3.scaleLinear().range([0, chartWidth]);
+                            //y axis is ordinal
+                            var y = d3.scaleBand().range([chartHeight, 0]);
+
+                            var g = choose_chart.append("g")
+                            .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); //shift the chart to the right and down
+
+                            var topic_weights = topic_name + "_weights";
+                            var topic_words = topic_name + "_words";
+                            //sort the data by topic_weights
+                            data.sort(function(a, b) {
+                              return b[topic_weights] - a[topic_weights];
+                            });
+
+                            //pick the top 20 words
+                            data = data.slice(0, 20).reverse();
+
+                            console.log(data);
+
+                            //set the domain of the x and y scales
+                            x.domain([0, d3.max(data, function(d) { return parseFloat(d[topic_weights]); })]);
+                            y.domain(data.map(function(d) { return d[topic_words]; })).padding(0.1);
+
+                            //group the x axis elements together
+                            g.append("g")
+                            .attr("class", "x axis")
+                            .attr("transform", "translate(0," + chartHeight + ")") //shift the x axis to the bottom of the chart
+                            .call(d3.axisBottom(x).ticks(5).tickFormat(function(d){return parseFloat(d);}).tickSizeInner([-chartHeight]));
+
+                            //group the y axis elements together
+                            g.append("g")
+                            .attr("class", "y axis")
+                            .call(d3.axisLeft(y));
+
+                            //create the bars
+                            var bars = g.selectAll(".bar")
+                            .data(data)
+                            .enter().append("rect")
+                            .attr("class", "bar")
+                            .attr("x", 0)
+                            .attr("height", y.bandwidth())
+                            .attr("y", function(d) { return y(d[topic_words]); })
+                            .attr("width", function(d) { return x(d[topic_weights]); })
+                            .on("mousemove", function(d){
+                              tooltip
+                                .style("left", d3.event.pageX - 50 + "px") // move the tooltip to the left of the mouse
+                                .style("top", d3.event.pageY - 70 + "px") // move the tooltip to the top of the mouse
+                                .style("display", "inline-block") // make the tooltip visible
+                                //in the tooltip, towip_weight should be in 2 decimal places
+                                .html((d[topic_words]) + "<br>" + (formatAsPercentage(d[topic_weights]))); // set the text of the tooltip
+                          })
+                          .on("mouseout", function(d){ tooltip.style("display", "none");});
+
+                          //topic_weights in 2 decimal places
+                          var formatAsPercentage = d3.format(".2f");
+                          
+
+                            //append title to the chart
+                            g.append("text")
+                            .attr("x", (chartWidth / 2))
+                            .attr("y", 0 - (margin.top / 2))
+                            .attr("text-anchor", "middle")
+                            .style("font-size", "16px")
+                            .style("text-decoration", "underline")
+                            .text(topic_name);
+
+                          function plotWordCloud(topic_file) {
+                            d3.csv(`public/text_label_explorer/${topic_file}.csv`,function(data){
+                              var margin = {top: 30, right: 50, bottom: 30, left: 50};
+                              var width = 960 - margin.left - margin.right;
+                              var height = 500 - margin.top - margin.bottom
+
+                              var g = d3.select('.cloud-section').append("svg").attr("width", 960).attr("height", 500)
+                                      .append("g").style("width", "100%")
+                                      .style("height", "100%")
+                                      .style("position", "center")
+                                      .style("background-color", "white")
+                                      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                              
+                              var color = d3.scaleOrdinal(d3.schemeCategory20);
+                                  //pick the first 100 words but sort the data by weight
+                                    data = data.sort((a,b)=>+b[topic_words] - +a[topic_weights]).slice(0,);
+                                  const wordScale = d3.scaleLinear()
+                                      .domain(d3.extent(data,d=>+d[topic_weights]))
+                                      .range([10,120])
+                                    
+                                var layout = d3.layout.cloud()
+                                      .size([width, height])
+                                    .timeInterval(2) //for
+                                      .words(data)
+                                    //   .rotate(function() { return ~~(Math.random() * 2)*90; }) //
+                                    .rotate(function(d) { return 0; })
+                                      .fontSize(d=>wordScale(d[topic_weights]))
+                                      //.fontStyle(function(d,i) { return fontSyle(Math.random()); })
+                                      .fontWeight(["bold"])
+                                      .text(function(d) { return d[topic_words]; })
+                                      .spiral("rectangular") // "archimedean" or "rectangular"
+                                      .on("end", draw)
+                                      .start();
+
+                                  var wordcloud = g.append("g")
+                                      .attr('class','wordcloud')
+                                      .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
+                                      
+                                  g.append("g")
+                                      .attr("class", "axis")
+                                      .attr("transform", "translate(0," + height + ")")
+                                      .selectAll('text')
+                                      .style('fill',function(d) { return color(d); })
+                                //       .style('font','sans-serif');
+
+                                function draw(words) {
+                                    wordcloud.selectAll("text")
+                                        .data(words)
+                                        .enter().append("text")
+                                        .attr('class','word')
+                                      .style("fill", function(d, i) { return color(i); })
+                                        .style("font-size", function(d) { return d.size + "px"; })
+                                //         .style("font-family", function(d) { return d.font; })
+
+                                        .attr("text-anchor", "middle")
+                                        .attr("transform", function(d) { return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")"; }) //rotate text around its center angle value is in degrees and the value is calculated by the layout e.g d.rotate = 90 
+                                        .text(function(d) { return d.text; });
+                                };
+                                  
+                                });
+
+                              }
+
+                              clearWordCloud(); 
+                             //call the function to plot the word cloud
+                             plotWordCloud(topic_file);
+                    
+                          }
+                        });
+                      }
+                      //call the function to plot the topic bars
+                      plotTopicBars(topic_file, topic_name);
+                      //create a function to remove the topic bars call clearTopicBars
+                      
+                      //call the function to clear the topic bars
+                      clearTopicBars();
+
+
+                      })
+
+                      // Add the topic name text
+                      pairs.append("text")
+                        .attr("class", "name-text") // Give the text a class so we can style it 
+                        .attr("x", boxWidth / 2)
+                        .attr("y", boxHeight / 2 - 4/3 * boxHeight)
+                        .attr("text-anchor", "middle")
+                        .attr("alignment-baseline", "middle")
+                          .attr("cursor", "pointer")
+                        .text(function(d) { return d[Object.keys(d)[0]]; });
+
+                      // Add the topic weight box
+                      pairs.append("rect")
+                        .attr("class", "weight-box") // Give the box a class so we can style it
+                        .attr("x", 0) 
+                        .attr("y", boxHeight- 4/3 *boxHeight) //
+                        .attr("width", boxWidth)
+                        .attr("height", boxHeight)
+                        .style("fill", "white")
+
+                      // Add the topic weight text
+                      pairs.append("text")
+                        .attr("class", "weight-text")
+                        .attr("x", boxWidth / 2)
+                        .attr("y", boxHeight + (boxHeight / 2) - 4/3 * boxHeight) //
+                        .attr("text-anchor", "middle") // This is needed to center the text
+                        .attr("alignment-baseline", "middle") // This is needed to vertically center the text
+                        .text(function(d) { return d[Object.keys(d)[1]]; });
+
+                        // Add the topic weight label
+                        choose_topic.append("text")
+                        .attr("class", "weight-label")
+                        .attr("x", left - boxWidth/5) // position the label to the left of the weight box
+                        .attr("y", boxHeight + (boxHeight / 2) + top - 4/3 *boxHeight)
+                        .attr("text-anchor", "end")
+                        .attr("alignment-baseline", "middle")
+                        .style("font-weight", "bold")
+                        .text("Weight:");
+
+                        // Add the topic name label
+                        choose_topic.append("text")
+                        .attr("class", "name-label")
+                        .attr("x", left - boxWidth/4) // position the label to the left of the name box
+                        .attr("y", boxHeight / 2 + top - 4/3 * boxHeight)
+                        .attr("text-anchor", "end")
+                        .style("font-weight", "bold")
+                        .attr("alignment-baseline", "middle")
+                        .text("Topic:");
+
+                        // Add the title
+                        choose_topic.append("text")
+                        .attr("class", "title")
+                        .attr("x", (boxWidth+boxSpacing)*3/2+left)
+                        .attr("y", top/4)
+                        .attr("text-anchor", "middle")
+                        .style("font-size", "20px")
+                        .style("font-weight", "bold")
+                        .text("click on a topic to view its top-words and word-cloud");
+                    
+
+                  });
+                }
+                
+                //run the function updateboxes
+                updateboxes(techniqueColumn);
+
+            //create a function to create the topFiveMatches called updateTopFiveMatches
+            the_index = d.index;
+
+            //run the function clearTopFiveMatches
+            clearTopFiveMatches();
+
+            //run the function updateTopFiveMatches
+            updateTopFiveMatches(the_index);
+
+
+
+                
+
+
+
+                });
+
+                //add the title
+                t_scatter.append("text")
+                .attr("x", 300)
+                .attr("y", 20)
+                .attr("text-anchor", "middle")
+                .style("font-size", "20px")
+                .text(topicColumnPairs[topicColumnIndex][0].slice(0, -2) + " " + "Scatter Plot");
+
+                //add the y axis label
+                t_scatter.append("text")
+                .attr("x", -70)
+                .attr("y", 12)
+                .attr("text-anchor", "end")
+                .attr("transform", "rotate(-90)")
+                .style("font-size", "14px")
+                .style("font-weight", "bold")
+                .text(topicColumnPairs[topicColumnIndex][1]);
+
+                //add the x axis label
+                t_scatter.append("text")
+                .attr("x", t_width-100)
+                .attr("y", t_height-10)
+                .attr("text-anchor", "end")
+                .style("font-size", "15px")
+                .style("font-weight", "bold")
+                .text(topicColumnPairs[topicColumnIndex][0]);
+
+                //add the legend
+                var t_legend = t_scatter.selectAll(".t_legend") //select all the legend elements
+                .data(t_color.domain()) //bind the data to the legend elements
+                .enter()
+                .append("g")
+                .attr("class", "t_legend")
+                .attr("transform", function(d, i){
+                  return "translate(0," + i * 20 + ")";
+                });
+
+                //add the legend rectangles
+                t_legend.append("rect")
+                .attr("x", t_width - 120)
+                .attr("y", 50)
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", t_color)
+                .style("cursor", "pointer")
+
+                //add the legend text
+                t_legend.append("text")
+                .attr("x", t_width - 100)
+                .attr("y", 59)
+                .attr("dy", ".35em")
+                .style("text-anchor", "start")
+                .text(d => d)
+
+                //click event handler for the legend
+                t_legend.select("rect")
+                .on("click", function(d){
+                  //update the side panel
+                  updateTopicSidePanel(d);
+                  //clear boxes
+                  clearboxes();
+                  //clear topic bars
+                  clearTopicBars();
+                  //clear the word cloud
+                  clearWordCloud();
+
+
+                  //check if the rectangle is already highlighted
+                  if(d3.select(this).style("stroke")=="black"){
+                    //unhighlight the rectangle
+                    d3.select(this).style("stroke", "none");
+
+                    //unhighlight the points
+                    t_scatter.selectAll("circle")
+                    .filter(function(e){
+                      return e[techniqueColumn] == d;
+                    })
+                    .attr("fill", d => t_color(d[techniqueColumn]))
+                    .attr("r", 2)
+                    .attr("stroke", "none")
+                    //dim all points
+                    .attr("opacity", 0);
+
+                    t_scatter.selectAll("circle")
+                    .attr("opacity", 1);
+
+                  }else{
+                    //highlight the rectangle
+                    d3.select(this).style("stroke", "black")
+                    .style("stroke-width", 2);
+
+                    //unhighlight other rectangles
+                    t_legend.select("rect")
+                    .filter(function(e){
+                      return e != d;
+                    })
+                    .style("stroke", "none");
+
+                    //unhighlight all points
+                    t_scatter.selectAll("circle")
+                    .filter(function(e){
+                      return e[techniqueColumn] != d;
+                    })
+                    .attr("fill", d => t_color(d[techniqueColumn]))
+                    .attr("r", 2)
+                    .attr("stroke", "none")
+                    //dim all points
+                    .attr("opacity", 0);
+
+                    //highlight the point of the selected tag
+                    t_scatter.selectAll("circle")
+                    .filter(function(e){
+                      return e[techniqueColumn] == d;
+                    })
+                    .transition()
+                    .duration(500)
+                    .attr("fill", d => t_color(d[techniqueColumn]))
+                    .attr("r", 5)
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 2)
+                    .attr("opacity", 1);
+                  }
+                  
+
+                })
+
+
+
+            }
+          })
+
+
+          
+
+
+
+        }
+
+      });
+
+    </script>
+</body>
+</html>
