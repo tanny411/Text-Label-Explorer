@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!--add a title-->
+    <title>Text Label Explorer</title>
     <meta charset="utf-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes">
@@ -13,17 +15,42 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-
+    <div id="project-title" style="position: absolute; top: -30px; left: 70;">
+        <span>T</span>
+        <span>e</span>
+        <span>x</span>
+        <span>t</span>
+        <span> </span>
+        <span>L</span>
+        <span>a</span>
+        <span>b</span>
+        <span>e</span>
+        <span>l</span>
+        <span> </span>
+        <span>E</span>
+        <span>x</span>
+        <span>p</span>
+        <span>l</span>
+        <span>o</span>
+        <span>r</span>
+        <span>e</span>
+        <span>r</span>
+        <p>by Aisha Khatun and Mustapha Momoh</p>
+    </div>
 <div id = "context-menu">
     <div class= "item" id="add-to-list">add to list</div>
 </div>
-<div class ="container">
-    <div class ="top-section"> 
+
+<div class ="flex-container">
+    <div class ="top-section">
         <!-- <div id="side-panel" style="position: absolute; top: 20px; right: 20px; width: 200px; height: 50%; padding: 20px;"></div> -->
         <div class="Dimensionality-Reduction">
+
                   <!--Add side panel-->
-        <aside style="float: right; margin-right: 20%;">
+        <aside style="float: right; margin-right: 10%;">
+            
           <h3>Dimensionality Reduction</h3>
+          
           <select id="scatter-select">
               <option value="scatter0">Please Select a Technique</option>
               <option value="scatter1">Factor Analysis scatter plot</option>
@@ -332,7 +359,7 @@ d3.select(document).on("click", function() {
                     //add a header row to selected words list
                 //check if the header row already exists
                 if (selectedWordsDiv.select("#header-row").empty()) {
-                    selectedWordsDiv.append('li').html("index&nbsp;&nbsp;|&nbsp;&nbsp;tag&nbsp;&nbsp;|&nbsp;&nbsp;sub-tag&nbsp;&nbsp;|&nbsp;&nbsp;text").style("font-weight", "bold").attr("id", "header-row");
+                    selectedWordsDiv.append('li').html("index&nbsp;&nbsp;|&nbsp;&nbsp;tag&nbsp;&nbsp;|&nbsp;&nbsp;sub-tag&nbsp;&nbsp;|&nbsp;&nbsp;text&nbsp;&nbsp;|&nbsp;&nbsp;notes").style("font-weight", "bold").attr("id", "header-row");
                 }
                     saveListBtn.on('click', function() {
                         // create the CSV string
