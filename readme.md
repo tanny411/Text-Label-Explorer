@@ -1,1 +1,1 @@
-Please click [here](https://mustaphau.github.io/AkMm_TextLabelExplorer/) to view the project.
+Please click [here](https://tanny411.github.io/Text-Label-Explorer/) to view the project.
