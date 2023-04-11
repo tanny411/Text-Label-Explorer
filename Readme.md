@@ -26,7 +26,7 @@ The data will be stored in `data` and `pubilc` folder.
 
 ### View project
 
-You can view the UI at by opening `index.html` in your browser.
+You can view the UI by opening `index.html` in your browser.
 
 ## License
 
