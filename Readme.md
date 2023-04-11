@@ -15,7 +15,7 @@ pip3 install -r requirements.txt
 ## Usage
 
 ### Python script
-The python script is already run and data stored in the appropriate place. If you want to run with your own data, save your data as `data.csv` following the format of the current data.csv file. Then run the python scripts:
+The python script is already run and data stored in the appropriate place. If you want to run with your own data, save your data as `data/data.csv` following the format of the current data.csv file. Then run the python scripts:
 
 ```bash
 python3 pyscripts/generate_embeddings.py
