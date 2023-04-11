@@ -52,7 +52,7 @@ The required changes are:
 
 * Lastly, run `python -m http.server` to start python simple server
 * Navigate to `http://localhost:8080` in your web browser
-* locate the index.html file, then click to open.
+* locate the `index.html` file, then click to open.
 
 
 ## License
