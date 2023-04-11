@@ -181,9 +181,9 @@ def main(source_filename, target_filename):
 
 
 # Runs all dimensionality reduction algorithms and save as csv
-# main(source_filename="data/data.csv" ,target_filename="data/embeddings.csv")
+main(source_filename="data/data.csv" ,target_filename="data/embeddings.csv")
 
-# # Plots and save all embeddings in "pyscripts/plots" folder
-# draw(filename="data/embeddings.csv", target_dir="data/plots/dimension_reduction")
+# Plots and save all embeddings in "pyscripts/plots" folder
+draw(filename="data/embeddings.csv", target_dir="data/plots/dimension_reduction")
 
 get_top_matches(source_filename="data/embeddings.csv", target_filename="data/top_5_matches.csv", n=5)
