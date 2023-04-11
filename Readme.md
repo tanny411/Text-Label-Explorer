@@ -47,7 +47,7 @@ The required changes are:
 1. From `href="public/style.css"` to `href="style.css"`
 2. From  `d3.csv("public/embeddings_new.csv"...`   to `d3.csv("embeddings_new.csv"...`
 3. From `d3.csv("public/top_5_matches.csv"...`    to `d3.csv("top_5_matches.csv"...`
-4. From `d3.csv(public/top_topics/${techniqueColumn}.csv`....` to `d3.csv(${techniqueColumn}.csv...`
+4. From `d3.csv(public/top_topics/${techniqueColumn}.csv....` to `d3.csv(${techniqueColumn}.csv...`
 5. From `d3.csv(public/text_label_explorer/${topic_file}.csv..` to `d3.csv(${topic_file}.csv..`
 
 * Lastly, run `python -m http.server` to start python simple server
