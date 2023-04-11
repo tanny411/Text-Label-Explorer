@@ -1,13 +1,12 @@
 Please click [here](https://tanny411.github.io/Text-Label-Explorer/) to view the project.
 
 ## Students' Information
-1.  - Name: Aisha Khatun
-    - Student ID: 21012959
-    - WATIAM: a2khatun
 
-2.  - Name: Mustapha Unubi Momoh
-    - Student ID: 20986226
-    - WATIAM: mmomoh
+| Name                   | Student ID | WATIAM   |
+|------------------------|-----------|-----------|
+| Aisha Khatun     | 21012959 | a2khatun |
+| Mustapha Unubi Momoh | 20986226 | mmomoh   |
+
 
 ## Installation
 
