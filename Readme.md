@@ -26,12 +26,7 @@ The data will be stored in `data` folder.
 
 ### View project
 
-```bash
-npm start
-```
-
-You can view the UI at `localhost:3500`.
-```
+You can view the UI at by opening `index.html` in your browser.
 
 ## License
 
