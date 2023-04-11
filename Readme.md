@@ -1,4 +1,4 @@
-Please click [here](https://tanny411.github.io/Text-Label-Explorer/) to view the project.
+You can view the project by clicking on this link: https://tanny411.github.io/Text-Label-Explorer/. If you're accessing it from a laptop, we recommend setting the zoom level to 50%. We are currently working on optimizing the layout to improve the viewing experience on all screen sizes and this will be included in the next update.
 
 ## Students' Information
 
