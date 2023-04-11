@@ -20,6 +20,7 @@ The python script is already run and data stored in the appropriate place. If yo
 ```bash
 python3 pyscripts/generate_embeddings.py
 python3 pyscripts/get_topics.py
+python3 pyscripts/arrange_data.py
 ```
 The data will be stored in `data` folder.
 
