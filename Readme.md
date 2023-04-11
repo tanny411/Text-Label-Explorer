@@ -22,7 +22,7 @@ python3 pyscripts/generate_embeddings.py
 python3 pyscripts/get_topics.py
 python3 pyscripts/arrange_data.py
 ```
-The data will be stored in `data` folder.
+The data will be stored in `data` and `pubilc` folder.
 
 ### View project
 
