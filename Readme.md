@@ -1,14 +1,14 @@
 Please click [here](https://tanny411.github.io/Text-Label-Explorer/) to view the project.
 
-## Student Information
+## Students' Information
 - Name: Aisha Khatun
 - Student ID: 21012959
 - WATIAM: a2khatun
 
-## Student Information
 - Name: Mustapha Unubi Momoh
 - Student ID: 20986226
 - WATIAM: mmomoh
+- 
 ## Installation
 
 If you want to run the python scripts, install the python requirements.
