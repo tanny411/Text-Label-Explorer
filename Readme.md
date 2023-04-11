@@ -24,6 +24,8 @@ python3 pyscripts/arrange_data.py
 ```
 The data will be stored in `data` and `pubilc` folder.
 
+## View the UI
+
 ### Setting up the server
 Inder to successfully load the resources, you need to use a Node.js server or a simple python server.
 
@@ -40,25 +42,18 @@ This will start the Node.js server with Express.
 
 #### Python simple server
 * To use python simple server, move all the files to the same location or folder. i.e all the datasets (csv files) and the style.css, `d3.layout.cloud.js`, and `index.html`
-* Open `index.html` and edit the file paths for all the referenced files. Since the files are now located in the same directory as `index.html`, remove the prefixes. E.g
-Change the reference to topic files from `d3.csv(`text_label_explorer/${topic_file}.csv`... to `d3.csv(`${topic_file}.csv`,function(data)`
+* Open `index.html` and edit the file paths for all the referenced files. Since the files are now located in the same directory as `index.html`, remove the prefixes. 
 The required changes are:
-** `href="public/style.css"` to `href="style.css"`
-** `d3.csv("public/embeddings_new.csv"...`   to `d3.csv("embeddings_new.csv"...`
-** `d3.csv("public/top_5_matches.csv"...`    to `d3.csv("top_5_matches.csv"...`
-** `d3.csv(`public/top_topics/${techniqueColumn}.csv`....` to `d3.csv(`${techniqueColumn}.csv`...`
-** `d3.csv(`public/text_label_explorer/${topic_file}.csv`..` to `d3.csv(`public/${topic_file}.csv`..` to `d3.csv(`${topic_file}.csv`...`
+1. `href="public/style.css"` to `href="style.css"`
+2. `d3.csv("public/embeddings_new.csv"...`   to `d3.csv("embeddings_new.csv"...`
+3. `d3.csv("public/top_5_matches.csv"...`    to `d3.csv("top_5_matches.csv"...`
+4. `d3.csv(`public/top_topics/${techniqueColumn}.csv`....` to `d3.csv(`${techniqueColumn}.csv`...`
+5. `d3.csv(`public/text_label_explorer/${topic_file}.csv`..` to `d3.csv(`public/${topic_file}.csv`..` to `d3.csv(`${topic_file}.csv`...`
 
 * Lastly, run `python -m http.server` to start python simple server
 * Navigate to `http://localhost:8080` in your web browser
 * locate the index.html file, then click to open.
 
-
-
-
-### View project
-
-You can view the UI by opening `index.html` in your browser.
 
 ## License
 
