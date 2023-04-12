@@ -11,4 +11,4 @@ for filename in os.scandir("data/topic_models_all_words"):
 
 for filename in os.scandir("data/data_topics_compressed"):
     file = filename.path
-    pd.read_csv(file).to_csv(f"public/top_topics/top_topics+{filename.name}", index=False)
+    pd.read_csv(file).to_csv(f"public/top_topics/top_topic_{filename.name.replace(' ', '_')}", index=False)
